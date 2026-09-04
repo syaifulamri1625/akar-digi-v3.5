@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AKAR DIGI V3.5 - SMKN1GS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen p-3 sm:p-5 md:p-6 antialiased flex flex-col justify-between">
+    <div class="max-w-4xl mx-auto space-y-4 sm:space-y-6 w-full flex-grow">
+        
+        <!-- Header Informasi & Logo -->
+        <div class="bg-slate-800 p-4 sm:p-5 rounded-2xl border border-slate-700/80 shadow-xl flex flex-col gap-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b sm:border-b-0 sm:pb-0 border-slate-700/60">
+                <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                    <div id="roleBadgeContainer">
+                        <span class="inline-block bg-slate-700 text-slate-300 text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-semibold">Memeriksa Akses...</span>
+                    </div>
+                    <button onclick="triggerLogout()" class="text-xs bg-rose-900/80 hover:bg-rose-800 text-rose-200 border border-rose-700 px-3 py-1.5 rounded-xl transition font-medium shadow-sm">Keluar</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-1">
+                <label for="academicYearSelect" class="text-[11px] text-slate-400 uppercase font-semibold">Tahun Arsip</label>
+                <select id="academicYearSelect" onchange="changeAcademicYear()" class="bg-slate-900 border border-slate-700 text-amber-300 text-xs font-bold rounded-xl p-3 sm:py-2.5 sm:px-3 focus:ring-2 focus:ring-amber-500 outline-none w-full sm:w-64">
+                    <option value="TA_2022_2023">TA 2022/2023</option>
+                    <option value="TA_2023_2024">TA 2023/2024</option>
+                    <option value="TA_2024_2025">TA 2024/2025</option>
+                    <option value="TA_2025_2026">TA 2025/2026</option>
+                    <option value="TA_2026_2027" selected>TA 2026/2027</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Form Unggah Berkas (Hanya muncul untuk Guru / Admin) -->
+        <div id="uploadSection" class="bg-slate-800 p-4 sm:p-8 rounded-2xl shadow-xl border border-slate-700/80 hidden">
+            <h2 class="text-base sm:text-lg font-bold mb-1 text-slate-200">Form Unggah Berkas (Full Access)</h2>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed">Pilih Sub-kategori Instrumen Akreditasi Resmi, untuk diarsipkan ke Google Drive Sekolah sesuai Tahun Ajaran aktif.</p>
+            
+            <form id="uploadForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs sm:text-sm font-medium mb-1.5 text-slate-300">Pilih Sub-Kategori / Sub-Folder Tujuan</label>
+                    <select id="folderId" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                        <option value="">-- Pilih Instrumen Bukti Fisik --</option>
+                        <optgroup label="01_STANDAR_ISI">
+                            <option value="1.1">01.1 KSP (Kurikulum Satuan Pendidikan)</option>
+                            <option value="1.2">01.2 Kalender Akademik / Tahunan</option>
+                            <option value="1.3">01.3 Dokumen Pedoman Evaluasi Kurikulum</option>
+                            <option value="1.4">01.4 Dokumen Pendampingan Kurikulum</option>
+                        </optgroup>
+                        <optgroup label="02_STANDAR_PROSES">
+                            <option value="2.1">02.1 RPP / Modul Ajar</option>
+                            <option value="2.2">02.2 Capaian Pembelajaran (CP/CL) & Analisis</option>
+                            <option value="2.3">02.3 KKTP</option>
+                            <option value="2.4">02.4 Prota & Prosem</option>
+                            <option value="2.5">02.5 Bahan Ajar, Referensi & Media</option>
+                            <option value="2.6">02.6 Jadwal, Agenda & Daftar Hadir</option>
+                            <option value="2.7">02.7 Program Kokurikuler & Refleksi</option>
+                            <option value="2.8">02.8 Video & Foto Kegiatan Pembelajaran</option>
+                        </optgroup>
+                        <optgroup label="03_STANDAR_PENILAIAN">
+                            <option value="3.1">03.1 Program Perencanaan Penilaian Formatif & Sumatif</option>
+                            <option value="3.2">03.2 Kisi-kisi, Soal, Kunci Jawaban & Pedoman</option>
+                            <option value="3.3">03.3 Daftar Nilai & Analisis Soal</option>
+                            <option value="3.4">03.4 Jadwal & Refleksi Penilaian Sumatif Harian</option>
+                            <option value="3.5">03.5 Laporan Hasil Belajar ke Orang Tua</option>
+                        </optgroup>
+                        <optgroup label="04_STANDAR_PTK">
+                            <option value="4.1">04.1 SK Pembagian Tugas Pokok & Tambahan</option>
+                            <option value="4.2">04.2 Program PKB Guru</option>
+                            <option value="4.3">04.3 Program & Jadwal Supervisi</option>
+                            <option value="4.4">04.4 Dokumen Hasil Supervisi & PKG</option>
+                            <option value="4.5">04.5 Refleksi Hasil PKG</option>
+                        </optgroup>
+                        <optgroup label="05_STANDAR_SARPRAS">
+                            <option value="5.1">05.1 Dokumen Sarana dan Prasarana</option>
+                            <option value="5.2">05.2 Foto/Video Lingkungan Belajar</option>
+                        </optgroup>
+                        <optgroup label="06_STANDAR_PENGELOLAAN">
+                            <option value="6.1">06.1 SK Visi Misi Sekolah</option>
+                            <option value="6.2">06.2 RKJM & RKT</option>
+                            <option value="6.3">06.3 Pemetaan Kebutuhan & Potensi Warga</option>
+                            <option value="6.4">06.4 Dokumen PBD (Analisis Rapor Pendidikan)</option>
+                            <option value="6.5">06.5 Evaluasi & Laporan Pelaksanaan RKT</option>
+                            <option value="6.6">06.6 Rapat Sosialisasi Program dengan Orang Tua</option>
+                            <option value="6.7">06.7 Pedoman Organisasi & Tata Tertib</option>
+                        </optgroup>
+                        <optgroup label="07_STANDAR_PEMBIAYAAN">
+                            <option value="7.1">07.1 RAB Jurusan</option>
+                            <option value="7.2">07.2 Laporan Penggunaan Dana Praktikum</option>
+                            <option value="7.3">07.3 Nota, Bukti Transaksi & SPJ Keuangan</option>
+                        </optgroup>
+                        <optgroup label="08_STANDAR_KELULUSAN">
+                            <option value="8.1">08.1 Kerjasama Mitra Pembangunan / DUDI</option>
+                            <option value="8.2">08.2 Data Lulusan & Portofolio Peserta Didik</option>
+                            <option value="8.3">08.3 Ekstrakurikuler (SK, Program, Jadwal, Absen)</option>
+                            <option value="8.4">08.4 Prestasi Akademik & Non-Akademik</option>
+                        </optgroup>
+                        <optgroup label="09_OPERASIONAL_HARIAN">
+                            <option value="9.1">09.1 RKAS & Laporan Keuangan Berkala</option>
+                            <option value="9.2">09.2 Layanan Pendidikan Inklusif</option>
+                            <option value="9.3">09.3 Pembelajaran Keberagaman</option>
+                            <option value="9.4">09.4 Rekapitulasi Data Peserta Didik</option>
+                            <option value="9.5">09.5 SK & Program TPPK</option>
+                            <option value="9.6">09.6 Program Kerja UKS</option>
+                            <option value="9.7">09.7 Video & Foto Kampanye Anti Bullying</option>
+                            <option value="9.8">09.8 Pemanfaatan Media Sosial</option>
+                            <option value="9.9">09.9 Dokumen Kode Etik</option>
+                            <option value="9.10">09.10 Peraturan Akademik & Pengaduan</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-xs sm:text-sm font-medium mb-1.5 text-slate-300">Pilih Berkas (PDF / DOCX / Media)</label>
+                    <input type="file" id="fileInput" required class="w-full text-xs text-slate-400 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer bg-slate-900 border border-slate-700 rounded-xl p-2">
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-semibold py-3 px-4 rounded-xl transition duration-200 text-xs sm:text-sm shadow-md">
+                    Unggah & Arsipkan ke Google Drive Sekolah
+                </button>
+            </form>
+        </div>
+
+        <div id="statusMessage" class="mt-2 text-xs sm:text-sm hidden p-3 rounded-xl break-words"></div>
+
+        <!-- Matriks Live Status Pemenuhan Dokumen -->
+        <div class="bg-slate-800 p-4 sm:p-6 rounded-2xl border border-slate-700/80 shadow-xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+                <h2 class="text-base sm:text-lg font-bold text-amber-400">Matriks Pemenuhan Sub-Dokumen Akreditasi</h2>
+                <button onclick="renderMatrix()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-4 py-2.5 rounded-xl transition w-full sm:w-auto font-medium shadow-sm">Muat Ulang</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="standardMatrixGrid">
+                <div class="text-center py-8 col-span-1 md:col-span-2">
+                    <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-amber-400 mb-2"></div>
+                    <p class="text-xs sm:text-sm font-medium text-slate-200">Proses sinkronisasi Dokumen dengan Google Drive Sekolah...</p>
+                    <p class="text-[11px] text-slate-400 mt-1">Mohon tunggu sebentar, untuk memastikan kelengkapan instrumen akreditasi tetap akurat.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pusat Laporan Resmi (PDF Generator) -->
+        <div class="bg-slate-800 p-4 sm:p-6 rounded-2xl border border-slate-700/80 shadow-xl">
+            <h2 class="text-base sm:text-lg font-bold text-amber-400 mb-1">Pusat Laporan Resmi (PDF)</h2>
+            <p class="text-xs text-slate-400 mb-4">Unduh rekapitulasi audit instrumen lengkap sesuai Tahun Arsip yang dipilih.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button onclick="requestReport('Bulanan')" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-semibold px-4 py-3 rounded-xl text-xs transition text-center shadow-sm">📄 Unduh Laporan Bulanan</button>
+                <button onclick="requestReport('Tahunan')" class="w-full sm:w-auto bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-slate-200 font-semibold px-4 py-3 rounded-xl text-xs transition text-center shadow-sm">📊 Unduh Laporan Tahunan</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full text-center py-4 mt-6 border-t border-slate-800 text-[11px] sm:text-xs text-slate-500">
+        Copyright &copy; 2026 - SMKN 1 Gunung Sindur
+    </footer>
+
+    <script>
+        let currentUserRole = 'teacher';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            google.script.run
+                .withSuccessHandler(role => {
+                    currentUserRole = role.toLowerCase();
+                    const badgeContainer = document.getElementById('roleBadgeContainer');
+                    const uploadSection = document.getElementById('uploadSection');
+
+                    if (currentUserRole === 'asesor') {
+                        badgeContainer.innerHTML = `<span class="inline-block bg-blue-900/80 text-blue-300 border border-blue-700 text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-semibold shadow-sm">Mode: Asesor (Read-Only)</span>`;
+                        uploadSection.classList.add('hidden');
+                    } else if (currentUserRole === 'admin') {
+                        badgeContainer.innerHTML = `<span class="inline-block bg-amber-900/80 text-amber-300 border border-amber-700 text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-semibold shadow-sm">Mode: Admin (Full Access)</span>`;
+                        uploadSection.classList.remove('hidden');
+                    } else {
+                        badgeContainer.innerHTML = `<span class="inline-block bg-emerald-900/80 text-emerald-300 border border-emerald-700 text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-semibold shadow-sm">Mode: Guru (Full Access)</span>`;
+                        uploadSection.classList.remove('hidden');
+                    }
+
+                    renderMatrix();
+                })
+                .getCurrentUserRole();
+        });
+
+        function triggerLogout() {
+            if (confirm("Apakah Anda yakin ingin keluar dari sesi portal?")) {
+                google.script.run
+                    .withSuccessHandler(res => {
+                        window.location.replace(res.targetUrl);
+                    })
+                    .processLogout();
+            }
+        }
+
+        function changeAcademicYear() {
+            renderMatrix();
+        }
+
+        function renderMatrix() {
+            const grid = document.getElementById('standardMatrixGrid');
+            const selectedTA = document.getElementById('academicYearSelect').value;
+            
+            grid.innerHTML = `
+                <div class="text-center py-8 col-span-1 md:col-span-2">
+                    <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-amber-400 mb-2"></div>
+                    <p class="text-xs sm:text-sm font-medium text-slate-200">Sedang menyinkronkan arsip ${selectedTA} dengan Google Drive...</p>
+                    <p class="text-[11px] text-slate-400 mt-1">Mohon tunggu sebentar untuk memastikan kelengkapan instrumen akreditasi tetap akurat.</p>
+                </div>
+            `;
+
+            google.script.run
+                .withSuccessHandler(data => {
+                    if (data.status === 'success') {
+                        grid.innerHTML = '';
+                        data.standards.forEach(std => {
+                            const isComplete = std.status === 'complete' && std.count > 0;
+                            const badgeClass = isComplete ? 'bg-emerald-900/60 text-emerald-300 border-emerald-700' : 'bg-rose-900/60 text-rose-300 border-rose-700';
+                            const badgeText = isComplete ? 'Terpenuhi' : 'Belum Lengkap';
+
+                            const showDriveBtn = (currentUserRole === 'admin' || currentUserRole === 'asesor');
+                            const driveLinkHtml = showDriveBtn 
+                                ? `<a href="${std.folderUrl}" target="_blank" class="bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 text-[10px] font-bold px-3.5 py-2 rounded-lg transition shadow">LIHAT</a>`
+                                : '';
+
+                            const card = document.createElement('div');
+                            card.className = "bg-slate-900/60 border border-slate-700/60 p-3 sm:p-4 rounded-xl flex justify-between items-center hover:border-slate-600 transition gap-3";
+                            card.innerHTML = `
+                                <div class="min-w-0 flex-1">
+                                    <h3 class="font-semibold text-xs text-slate-200 truncate" title="${std.name}">${std.name}</h3>
+                                    <p class="text-[11px] text-slate-400 mt-0.5">${std.count} Berkas terarsip</p>
+                                </div>
+                                <div class="flex items-center space-x-2 shrink-0">
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full border hidden sm:inline-block ${badgeClass}">${badgeText}</span>
+                                    ${driveLinkHtml}
+                                </div>
+                            `;
+                            grid.appendChild(card);
+                        });
+                    } else {
+                        grid.innerHTML = `<p class="text-rose-400 text-xs sm:text-sm col-span-1 md:col-span-2 text-center py-4">Gagal: ${data.message}</p>`;
+                    }
+                })
+                .withFailureHandler(err => {
+                    grid.innerHTML = `<p class="text-rose-400 text-xs sm:text-sm col-span-1 md:col-span-2 text-center py-4">Gagal memuat matriks server.<br><span class="text-[11px] text-slate-400">${err.message}</span></p>`;
+                })
+                .getStandardsData(selectedTA);
+        }
+
+        const uploadForm = document.getElementById('uploadForm');
+        if(uploadForm) {
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const folderId = document.getElementById('folderId').value;
+                const fileInput = document.getElementById('fileInput');
+                const submitBtn = document.getElementById('submitBtn');
+                const statusDiv = document.getElementById('statusMessage');
+                const selectedTA = document.getElementById('academicYearSelect').value;
+
+                if (!folderId || fileInput.files.length === 0) return;
+
+                const file = fileInput.files[0];
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Mengunggah...";
+                statusDiv.classList.add('hidden');
+
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function() {
+                    const base64Data = reader.result.split(',')[1];
+                    const payload = {
+                        folderId: folderId,
+                        fileName: file.name,
+                        mimeType: file.type,
+                        fileData: base64Data,
+                        role: currentUserRole,
+                        tahunAjaran: selectedTA
+                    };
+
+                    google.script.run
+                        .withSuccessHandler(result => {
+                            statusDiv.classList.remove('hidden');
+                            if (result.status === 'success') {
+                                statusDiv.className = "mt-3 text-xs sm:text-sm p-3 rounded-xl bg-emerald-950 text-emerald-200 border border-emerald-700/80";
+                                statusDiv.innerHTML = `Berhasil diarsipkan ke <b>${selectedTA}</b>! <a href="${result.fileUrl}" target="_blank" class="underline font-bold ml-1">Lihat File</a>`;
+                                uploadForm.reset();
+                                renderMatrix();
+                            } else {
+                                statusDiv.className = "mt-3 text-xs sm:text-sm p-3 rounded-xl bg-rose-950 text-rose-200 border border-rose-700/80";
+                                statusDiv.innerText = "Gagal: " + result.message;
+                            }
+                            submitBtn.disabled = false;
+                            submitBtn.innerText = "Unggah & Arsipkan ke Google Drive Sekolah";
+                        })
+                        .withFailureHandler(err => {
+                            statusDiv.classList.
+                            statusDiv.classList.remove('hidden');
+                            statusDiv.className = "mt-3 text-xs sm:text-sm p-3 rounded-xl bg-rose-950 text-rose-200 border border-rose-700/80";
+                            statusDiv.innerText = "Gagal sistem: " + err.message;
+                            submitBtn.disabled = false;
+                            submitBtn.innerText = "Unggah & Arsipkan ke Google Drive Sekolah";
+                        })
+                        .uploadFileToServer(payload);
+                };
+            });
+        }
+
+        function requestReport(type) {
+            const statusDiv = document.getElementById('statusMessage');
+            const selectedTA = document.getElementById('academicYearSelect').value;
+            statusDiv.classList.add('hidden');
+            statusDiv.className = "mt-3 text-xs sm:text-sm p-3 rounded-xl bg-amber-950/80 text-amber-200 border border-amber-700/80";
+            statusDiv.innerText = `Menyusun laporan instrumen ${type} (${selectedTA})...`;
+
+            google.script.run
+                .withSuccessHandler(result => {
+                    if (result.status === 'success') {
+                        statusDiv.className = "mt-3 text-xs sm:text-sm p-3 rounded-xl bg-emerald-950 text-emerald-200 border border-emerald-700/80";
+                        statusDiv.innerHTML = `Laporan Resmi (${selectedTA}) Berhasil! <a href="${result.pdfUrl}" target="_blank" class="underline font-bold ml-2">Unduh PDF</a>`;
+                    } else {
+                        statusDiv.className = "mt-3 text-xs sm:text-sm p-3 rounded-xl bg-rose-950 text-rose-200 border border-rose-700/80";
+                        statusDiv.innerText = "Gagal: " + result.message;
+                    }
+                })
+                .withFailureHandler(err => {
+                    statusDiv.className = "mt-3 text-xs sm:text-sm p-3 rounded-xl bg-rose-950 text-rose-200 border border-rose-700/80";
+                    statusDiv.innerText = "Gagal menyusun laporan: " + err.message;
+                })
+                .generatePDFReportServer(type, selectedTA);
+        }
+    </script>
+</body>
+</html>
