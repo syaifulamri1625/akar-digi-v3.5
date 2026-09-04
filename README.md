@@ -16,6 +16,21 @@
 
 ---
 
+## 📸 **Pratinjau Tampilan Aplikasi (Screenshots)**
+> *Berikut adalah contoh antarmuka pengguna pada portal AKAR-DIGI V3.5 yang berjalan responsif di berbagai perangkat:*
+
+| Halaman Masuk & Pendaftaran (*Login & Register*) | Dashboard Utama & Matriks Pemenuhan |
+| :---: | :---: |
+| <img src="screenshots/login-view.png" width="400" alt="Tampilan Login" /> | <img src="screenshots/dashboard-view.png" width="400" alt="Tampilan Dashboard" /> |
+| *Antarmuka autentikasi aman dengan tombol akses panduan penamaan file.* | *Tampilan utama lengkap dengan pemilihan TA, form unggah, dan matriks live.* |
+
+| Modal Panduan Penamaan Berkas | Pusat Laporan Resmi PDF |
+| :---: | :---: |
+| <img src="screenshots/modal-view.png" width="400" alt="Tampilan Modal Panduan" /> | <img src="screenshots/report-view.png" width="400" alt="Tampilan Laporan" /> |
+| *Pop-up panduan standar penamaan file sesuai kode program keahlian.* | *Fitur unduh rekapitulasi audit otomatis dalam format PDF.* |
+
+---
+
 ## 📌 **Tentang Aplikasi**
 **AKAR-DIGI V3.5** adalah sistem manajemen arsip digital berbasis web yang terintegrasi langsung dengan Google Drive dan Google Sheets. Aplikasi ini dirancang khusus untuk mempermudah pendidik, kepala sekolah, asesor, dan tenaga kependidikan dalam mengelola, memantau, serta mengunggah bukti fisik instrumen akreditasi sekolah secara terstruktur, transparan, dan akurat.
 
